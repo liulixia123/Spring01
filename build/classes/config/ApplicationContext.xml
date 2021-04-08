@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:component-scan base-package="service,dao,advice"></context:component-scan>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+	    <property name="url" value="jdbc:mysql:///test"></property>
+	    <property name="username" value="root"></property>
+	    <property name="password" value="root"></property>
+	</bean>
+    <!-- <bean id="myAspect" class="advice.MyAspect"></bean> -->
+    <!--配置AOP织入增强代码 -->
+    <!-- <aop:config proxy-target-class="true">    	
+    	<aop:pointcut expression="execution( * service ..*(..))" id="myPointCut"></aop:pointcut>
+    	<aop:aspect ref="myAspect">
+    		<aop:before method="before" pointcut-ref="myPointCut"/>
+    		<aop:after method="after" pointcut-ref="myPointCut"/>
+  			<aop:after-returning method="afterReturning" pointcut-ref="myPointCut"/>
+            <aop:around method="around" pointcut-ref=""/>
+    	</aop:aspect>
+    </aop:config> -->
+    <!--使用aspectj自动代理-->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+    <!-- <bean id="json" class="data.Data2Json">
+	</bean>
+	<bean id="xml" class="data.Data2Xml">
+	</bean>
+	<bean id="out" class="service.DataOut">
+    	<property name="ds" ref="xml"></property>
+	</bean> -->
+	<!-- <bean id="user" class="pojo.User">
+		<property name="id" value="1"></property>
+		<property name="username" value="zs"></property>
+	</bean> -->
+	<!-- <bean id="user" class="pojo.User" init-method="init" destroy-method="destory" scope="singleton">
+		<constructor-arg name="id" value="1"></constructor-arg>
+    	<constructor-arg name="username" value="zs"></constructor-arg>
+		<constructor-arg index="0" type="int" value="1"></constructor-arg>
+		<constructor-arg index="1" type="java.lang.String" value="zs"></constructor-arg>
+	</bean> -->
+	<!-- 静态工厂 -->
+	<!-- <bean id="user2" class="factory.StaticUserFactory" factory-method="getUser">
+		<property name="id" value="1"></property>
+		<property name="username" value="lisi"></property>
+	</bean>
+	实例工厂
+	<bean id="facatory" class="factory.UserFactory"></bean>
+	<bean id="user3" factory-bean="facatory" factory-method="getUser">
+		<property name="id" value="1"></property>
+		<property name="username" value="wangwu"></property>
+	</bean>
+	注入不同类型数据
+	<bean id="user" class="pojo.User" >
+	<property name="id" value="1"></property>
+	<property name="username" value="zs"></property>
+	<property name="arrayData">
+	    <array>
+	        <value>aaa</value>
+	        <value>bbb</value>
+	    </array>
+	</property>
+	<property name="listData">
+	    <list>
+	        <value>ccc</value>
+	        <value>ddd</value>
+	    </list>
+	</property>
+	<property name="setData">
+	    <set>
+	        <value>eee</value>
+	        <value>fff</value>
+	    </set>
+	</property>
+	<property name="mapData">
+	    <map>
+	        <entry>
+	            <key>
+	                <value>年龄</value>
+	            </key>
+	            <value>15</value>
+	        </entry>
+	        <entry>
+	            <key>
+	                <value>爱好</value>
+	            </key>
+	            <value>画画</value>
+	        </entry>
+	    </map>
+	</property>
+	<property name="pros">
+	    <props>
+	        <prop key="行为">符合</prop>
+	        <prop key="属性">白色</prop>
+	    </props>
+	</property>
+	</bean> -->
+	<!-- <bean id="dao" class="dao.impl.UserDaoImpl"></bean>
+	<bean id="userService" class="service.impl.UserServiceImpl" autowire="byName"> 
+		
+	</bean>-->
+</beans>
